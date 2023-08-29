@@ -20,11 +20,11 @@ class Model():
         self.conn.close()
 
     def update():
-        print("updated")
+        # print("updated")
         pass
 
     def delete():
-        print("deleted")
+        # print("deleted")
         pass
 
 
