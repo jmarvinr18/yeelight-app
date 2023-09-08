@@ -1,6 +1,7 @@
 from typing import Any
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, Text
+import json
 
 
 class Base(DeclarativeBase):
@@ -19,8 +20,10 @@ class Device(Base):
         self.port = port
         self.capabilities = capabilities
 
-    def __repr__(self):
-        return f'Device({self.id},{self.ip},{self.port},{self.capabilities})'
+    # def __iter__(self):
+    #     return iter({'ip': self.ip, 'port': self.port, 'capabilities': self.capabilities})
+
+    # def
 
 
 class SceneDevice(Base):
