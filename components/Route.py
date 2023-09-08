@@ -2,16 +2,16 @@ import customtkinter as ctk
 import tkinter as ttk
 from bulbs import *
 from PIL import Image
-import os 
+import os
 from frames.RightSidebarFrame import *
-from frames.HomeFrame import *
+from frames.home.main import *
 from frames.SceneFrame import *
 from frames.Device import *
 
 
 class Route:
     def __init__(self, master, parent) -> None:
-        
+
         right_frame = RightSideBarFrame(parent, width=600, height=250)
 
         self.list = [
@@ -36,12 +36,11 @@ class Route:
 
         file_path = os.path.dirname(os.path.realpath(__file__))
         self.image = customtkinter.CTkImage(light_image=Image.open(file_path + "/home-icon.png"),
-                                          dark_image=Image.open(
-                                              file_path + "/home-icon.png"),
-                                       size=(20, 20))
-        
-        self.current_page = self.list[0]["component"]
+                                            dark_image=Image.open(
+            file_path + "/home-icon.png"),
+            size=(20, 20))
 
+        self.current_page = self.list[0]["component"]
 
     def get_route_by_name(self, name):
         for i in self.list:
@@ -49,10 +48,9 @@ class Route:
                 obj = i
         return obj
 
-
     def get_current_page(self):
         return self.current_page
-    
+
     def switch_page(self, page):
         self.hide_all_frames()
         self.current_page = page
