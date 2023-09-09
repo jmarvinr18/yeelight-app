@@ -4,9 +4,9 @@ from bulbs import *
 from CTkListbox import *
 from tkinter import colorchooser
 import json
-from frames.RightSidebarFrame import *
+# from frames.RightSidebarFrame import *
 from frames.LeftSideBarFrame import *
-from frames.home.main import *
+# from frames.home.main import *
 from frames.SceneFrame import *
 from components.Route import *
 
@@ -35,7 +35,6 @@ class App(ctk.CTk):
         bulb = YeelightBulbs(data['ip'])
 
         bulb.set_rgb(color_code[0])
-        print(color_code[0])
 
     def switch_event(self):
 
@@ -43,7 +42,7 @@ class App(ctk.CTk):
             data = json.load(json_File)
 
         bulb = YeelightBulbs(data['ip'])
-        print(self.switch_var.get())
+
         if self.switch_var.get() == 'on':
             bulb.turnOn()
         else:
