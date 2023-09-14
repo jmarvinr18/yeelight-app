@@ -108,8 +108,9 @@ class DeviceDetails(ctk.CTkFrame):
         self.master = master
         self.device_details = device
         self.name = json.loads(device['capabilities'])['model']
-
         self.switch_var = ctk.StringVar(value="on")
+
+        self.selected_color = "#FFFFFF"
 
     def choose_color(self):
         color_code = colorchooser.askcolor(title="Choose color")
@@ -117,6 +118,8 @@ class DeviceDetails(ctk.CTkFrame):
         bulb = YeelightBulbs(self.device_details['ip'])
 
         bulb.set_rgb(color_code[0])
+
+        self.selected_color = color_code
 
     def switch_event(self):
 
@@ -161,7 +164,8 @@ class DeviceDetails(ctk.CTkFrame):
             row=2, column=1, pady=20, padx=20, sticky="w")
 
         color_chooser = ctk.CTkButton(self.middle_frame, text="Choose Color",
-                                      fg_color="#D22D4A", command=self.choose_color)
+                                      fg_color=self.selected_color, border_color="#D2D4DA", command=self.choose_color)
+
         color_chooser.grid(
             row=2, column=2, pady=20, padx=20, sticky="w")
 
@@ -195,7 +199,7 @@ class ScanDevice(ctk.CTkFrame):
 
         self.master = master
 
-        self.middle_frame = ctk.CTkFrame(
+        self.middle_frame = ctk.CTkScrollableFrame(
             self.master, width=100, height=500, fg_color="transparent")
         self.middle_frame.pack(side="top", fill="both", expand=True,
                                padx=20, pady=20)
