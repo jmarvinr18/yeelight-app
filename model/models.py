@@ -12,18 +12,38 @@ class Device(Base):
     __tablename__ = 'devices'
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(nullable=True)
+    model: Mapped[str] = mapped_column(nullable=True)
     ip: Mapped[str] = mapped_column(nullable=False)
     port: Mapped[int] = mapped_column(nullable=False)
     capabilities: Mapped[str] = mapped_column(Text, nullable=False)
     power: Mapped[bool] = mapped_column(Boolean, nullable=False)
     brightness: Mapped[float] = mapped_column(nullable=False)
-    # light_type:
+    hue: Mapped[int] = mapped_column(nullable=True)
+    saturation: Mapped[int] = mapped_column(nullable=True)
+    color_temperature: Mapped[int] = mapped_column(nullable=True)
 
-    def __init__(self, name="", ip="", port=0, capabilities=""):
+    def __init__(self,
+                 name="",
+                 ip="",
+                 port=0,
+                 model="",
+                 capabilities="",
+                 power=False,
+                 brightness=100.0,
+                 hue=0,
+                 saturation=0,
+                 color_temperature=0,
+                 ):
         self.name = name
         self.ip = ip
         self.port = port
+        self.model = model
         self.capabilities = capabilities
+        self.power = power
+        self.brightness = brightness
+        self.hue = hue
+        self.saturation = saturation
+        self.color_temperature = color_temperature
 
 
 class SceneDevice(Base):
@@ -33,6 +53,12 @@ class SceneDevice(Base):
         ForeignKey('devices.id'), nullable=False)
     scene_id: Mapped[int] = mapped_column(
         ForeignKey('scenes.id'), nullable=False)
+    capabilities: Mapped[str] = mapped_column(Text, nullable=False)
+    power: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    brightness: Mapped[float] = mapped_column(nullable=False)
+    hue: Mapped[int] = mapped_column(nullable=True)
+    saturation: Mapped[int] = mapped_column(nullable=True)
+    color_temperature: Mapped[int] = mapped_column(nullable=True)
 
     def __repr__(self):
         return f'SceneDevice({self.id},{self.device_id},{self.scene_id})'
